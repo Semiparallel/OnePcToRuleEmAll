@@ -1,0 +1,127 @@
+## (Optional) Looking Glass on proxmox
+
+Guide on how to setup looking glass on proxmox (!!work in Progress not functional atm!!)
+
+Prerequisites
+
+- A working Proxmox install on a computer with 2 GPU's (Tested with 7.1-6)
+- A Windows VM with GPU passthrough working (Tested with Win 10)
+- A Linux VM with GPU passthrough working (Tested With Ubuntu 21.10)
+- Proxmox Host Installed and running on the Windows VM
+
+Windows VM setup  
+Using the Proxmox GUI, Set the Windows VM Display to "none"  
+Then in a shell to the Proxmox host edit the Windows VM Config:
+
+```
+nano /etc/pve/qemu-server/**YOUR-WINDOWS-VM-ID**.conf
+```
+
+And add the arguments to the args: line. If the args: line doesnt exist, create it at the top of the config.
+
+```
+-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M -device virtio-mouse-pci -device virtio-keyboard-pci -spice 'addr=0.0.0.0,port=5930,disable-ticketing=on' -device virtio-serial-pci -chardev spicevmc,id=vdagent,name=vdagent -device virtserialport,chardev=vdagent,name=com.redhat.spice.0
+```
+
+or use
+
+```
+qm set **YOUR-Windows-VM-ID** --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M -device virtio-mouse-pci -device virtio-keyboard-pci -spice 'addr=0.0.0.0,port=5930,disable-ticketing=on' -device virtio-serial-pci -chardev spicevmc,id=vdagent,name=vdagent -device virtserialport,chardev=vdagent,name=com.redhat.spice.0'
+```
+
+And set Display to none in Proxmox Hardware
+
+More in https://looking-glass.io/wiki/Installation_on_other_distributions
+
+> The -device virtio-mouse-pci -device virtio-keyboard-pci are not strictly necessary but should reduce input latancy.
+
+Adjust the "size=32M " to your liking
+
+| Resolution           | Standard Dynamic Range | High Dynamic Range (HDR) \* |
+|----------------------|------------------------|----------------------------|
+| 1920x1080 (1080p)    | 32                     | 64                         |
+| 1920x1200 (1200p)    | 32                     | 64                         |
+| 1920x1440 (1440p)    | 32                     | 64                         |
+| 3840x2160 (2160p/4K) | 128                    | 256                        |
+
+> While Looking Glass can capture and display HDR, at the time of writing neither Xorg or Wayland can make use of it and it will be converted by the GPU drivers/hardware to SDR. Additionally using HDR doubles the amount of memory, bandwidth, and CPU load and should generally not be used unless you have a special reason to do so.
+
+Boot the Windows VM
+
+### Linux VM setup
+
+In a shell to the Proxmox host edit the Linux VM Config:
+
+```
+nano /etc/pve/qemu-server/**YOUR-LINUX-VM-ID**.conf
+```
+
+And add the arguments to the args: line. If the args: line doesnt exist, create it at the top of the config.
+
+```
+-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M
+
+USE THIS ONE 
+vvv
+
+-device ivshmem-plain,memdev=ivshmem,bus=pcie.0
+```
+
+> Dont forget to adjust the "size=32M" here to if you done something diffrent.
+
+OR use
+
+```
+qm set **YOUR-LINUX-VM-ID** --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M'
+
+
+USE THIS ONE 
+vvv
+qm set **YOUR-LINUX-VM-ID** --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0'
+```
+
+Add to /etc/pve/qemu-server/\*\*YOUR-Linux-VM-ID\*\*.conf
+
+```
+ ivshmem: size=32,name=**WINDOWS-VMID**        
+```
+
+On Proxmox
+
+However, those 2 files will be created as root-owned. You will need  to create a hook script to set the correct permissions for them  (/etc/tmpfile.d was having reliability issue on my machine for IVSHMEM  file, and it cannot override socket file's ownership at all):
+
+```
+# 3rd party script, created by the community, not part of Looking Glass project!
+
+mkdir /var/lib/vz/snippets 
+
+wget https://github.com/MakiseKurisu/single-node-homelab/raw/c6daee9c242571977a0af9088c4d7360dd309685/ansible/proxmox-init/pve-helper -O /var/lib/vz/snippets/pve-helper
+
+chmod +x /var/lib/vz/snippets/pve-helper
+
+qm set **YOUR-Linux-VM-ID** --hookscript=local:snippets/pve-helper
+
+echo "#lg-chown user" >> /etc/pve/qemu-server/**YOUR-Linux-VM-ID**.conf
+```
+
+> Bus 'pcie.x' not found Error: Selected a machine version that cannot handle the VirtIO SCSI Single settings.
+
+This currently only work for Windows guest, as Looking Glass Linux Host is immature at the moment.
+
+Boot the Windows VM, and download the latest Looking-glass source from https://looking-glass.io/downloads (Tested with version B5.0.1)
+
+Linux client build  
+https://looking-glass.io/docs/B6/install/#client-application
+
+Linux modules  
+https://looking-glass.io/docs/B5.0.1/module/
+
+installing
+
+https://looking-glass.io/wiki/Installation_on_other_distributions#Installing_the_IVSHMEM_Driver
+
+Running Looking-Glass
+
+- Make sure both VMs are running.
+- On the Linux VM, open a terminal and cd to the looking glass client build folder
+- Run Looking-Glass with ./looking-glass-client -f /dev/kvmfr0 -c \*\*YOUR LOCAL IP\*\* -p 5930
