@@ -60,7 +60,8 @@ Installing the vGpu Unlock v3 script from wvthoog. Best tutorial is in the https
 
 Optional: Based on your needs i prefer making Whiteboards for managing what i need for virtual machines and containers (lxc's) and how i need it something like this. If you need a drawing tool https://excalidraw.com/ is a good one.
 
-![grafik](https://github.com/user-attachments/assets/82e12233-1c4b-44ed-806c-c7d20174de1f)
+![grafik](https://github.com/user-attachments/assets/4e25e53a-e4eb-42d6-8f68-3a929711158b)
+
 
 I tried making Profile 1-4 and how they can be online at the same time in VGPU RAM CONST based on my needs i also made a script that switches the profiles dynamically later.
 
