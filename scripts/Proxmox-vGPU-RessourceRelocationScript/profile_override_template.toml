@@ -1,0 +1,186 @@
+[profile.nvidia-259]
+vgpu_type = "NVS"
+
+[profile.512MB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x1A000000
+framebuffer_reservation = 0x6000000
+
+[profile.1GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x38000000
+framebuffer_reservation = 0x8000000
+
+[profile.2GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x74000000
+framebuffer_reservation = 0xC000000
+
+[profile.3GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0xB0000000
+framebuffer_reservation = 0x10000000
+
+[profile.4GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0xEC000000
+framebuffer_reservation = 0x14000000
+
+[profile.5GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x128000000
+framebuffer_reservation = 0x18000000
+
+[profile.6GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x164000000
+framebuffer_reservation = 0x1C000000
+
+[profile.8GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x1DC000000
+framebuffer_reservation = 0x24000000
+
+[profile.10GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x254000000
+framebuffer_reservation = 0x2C000000
+
+[profile.12GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x2CC000000
+framebuffer_reservation = 0x34000000
+
+[profile.16GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x3BC000000
+framebuffer_reservation = 0x44000000
+
+[profile.20GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x4AC000000
+framebuffer_reservation = 0x54000000
+
+[profile.24GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x59C000000
+framebuffer_reservation = 0x64000000
+
+[profile.32GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0x77C000000
+framebuffer_reservation = 0x84000000
+
+[profile.48GB]
+vgpu_type = "NVS"
+num_displays = 1
+display_width = 1920
+display_height = 1080
+max_pixels = 2073600
+cuda_enabled = 1
+frl_enabled = 1
+framebuffer = 0xB2D200000
+framebuffer_reservation = 0xD2E00000
+
+#Profile 0
+[vm.100]
+profile = "profile.nvidia-259"
+
+#Profile 1
+[vm.110]
+profile = "profile.nvidia-259"
+[vm.111]
+profile = "profile.nvidia-259"
+
+#Profile 2
+[vm.121]
+profile = "profile.nvidia-259"
+
+#Profile 3
+[vm.130]
+profile = "profile.nvidia-259"
+
