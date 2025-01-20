@@ -128,7 +128,7 @@ qm set  <WINDWOS-VMID> --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -
 ```
 
 ::: info
-DONT FORGET TO CHANGE <WINDWOS-VMID> and <LINUXVM-ID> and <YOURSPICEPORT>
+DONT FORGET TO CHANGE <<WINDWOS-VMID>> and <<LINUXVM-ID>> and <<YOURSPICEPORT>>
 
 :::
 
