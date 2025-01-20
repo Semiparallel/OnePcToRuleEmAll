@@ -128,7 +128,7 @@ qm set  <WINDWOS-VMID> --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -
 ```
 
 ::: info
-DONT FORGET TO CHANGE <<WINDWOS-VMID>> and <<LINUXVM-ID>> and <<YOURSPICEPORT>>
+DONT FORGET TO CHANGE WINDWOS-VMID and LINUXVM-VMID> and YOURSPICEPORT
 
 :::
 
@@ -171,28 +171,18 @@ sudo chown user:user /dev/kvmfr0
 cd ..
 cd client
 cd build
+```
  ./looking-glass-client -f /dev/kvmfr0 -c **Your_Proxmox_Host_IP** -p **spice port specified** 
-```
 
-     At this point it will likely fail with  "failed to connect to spice  server." So so rerun the command without spice with the -s option.   -s For no input! liek usb or pheriperie
-
-```
-./looking-glass-client -f /dev/kvmfr0 -c 192.168.1.29 -p 5900 -s -
-```
-
-     If you want to make it permanent on reboot, add the modules to startup   
-
-     vi /etc/modules   
+At this point it will likely fail with  "failed to connect to spice  server." So so rerun the command without spice with the -s option.   -s For no input! like usb or pheriperie
 
 ```
-uio
-kvmfr
+./looking-glass-client -f /dev/kvmfr0 -c YourProxmoxHost -p YourSpicePort
 ```
-
-     After a reboot, sudo chown user:user /dev/uio0  then launch the ./looking-glass-client -f /dev/uio0 -L 32 -s   
 
      Success!  
 
+source:
 <https://technonagib.com/configure-spice-proxmox-ve/> from it
 
 ## 1-ActivatingSpice and USB INPUT
