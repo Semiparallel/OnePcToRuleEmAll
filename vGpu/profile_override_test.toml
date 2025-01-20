@@ -1,0 +1,44 @@
+#default Q universal Profile change if needed
+[profile.nvidia-259]
+vgpu_type = "NVS"
+num_displays = 1
+
+display_width = 1920
+display_height = 1080
+#display_width*display_height=max_pixels
+max_pixels = 2073600
+
+cuda_enabled = 1
+frl_enabled = 1
+#Profile B (Optimaler)
+[profile.nvidia-436]
+vgpu_type = "NVS"
+num_displays = 1
+
+display_width = 1920
+display_height = 1080
+#display_width*display_height=max_pixels
+max_pixels = 2073600
+
+cuda_enabled = 1
+frl_enabled = 1
+
+
+#dont change these! they are dinamycally updatet
+[vm.110]
+framebuffer = 0xB2D200000
+framebuffer_reservation = 0xD2E00000
+
+
+[vm.111]
+framebuffer = 0x4AC000000
+framebuffer_reservation = 0x54000000
+
+[vm.121]
+framebuffer = 0x59C000000
+framebuffer_reservation = 0x64000000
+
+[vm.130]
+framebuffer = 0x77C000000
+framebuffer_reservation = 0x84000000
+
