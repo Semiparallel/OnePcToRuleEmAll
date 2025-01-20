@@ -137,14 +137,6 @@ Also The Vm has to be machine: q35
 
 :::
 
-In the Windows Guest vm:
-
-And then the windows guest with NVIDIA card, install the ivshmem driver. Download this: <https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/upstream-virtio/> - get the latest file and unzip it. Then go to device manager, and for System Devices -> "PCI Standard RAM Controller" and make device manager search that folder you just downloaded.
-
-     I'm using the official 2019-07-23 build on both Windows(server) and Linux(viewer).   
-
-     On my fresh installed Ubuntu 18.04 guest (with an AMD card):   
-
 ```
 apt-get install build-essential
 
