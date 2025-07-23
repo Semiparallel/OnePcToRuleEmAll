@@ -9,7 +9,7 @@ it's
 - Energy saving (working on especially for GPU allocation and sleep times.)
 
 ::: warning!
-This Project is under heavy development changes and bugs areprettyfie part of it
+This Project is under heavy development changes and bugs are part of it
 
 ## What is it about?
 ---
@@ -54,7 +54,7 @@ This guide and all my tests were done on a RTX 2080 Ti which is based on the Tur
 
 ---
 
-You need .ISO files from <https://Proxmox.com>, Windows and your prefered Linux distribution like Ubunut or mint and virtIO Drivers <https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers>.
+You need .ISO files from <https://Proxmox.com>, Windows and its virtIO Drivers <https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers> and for your prefered Linux distribution like Ubunut or mint.
 
 > You only need to flash Proxmox to an usb stick as this will be the main PC Software (Hypervisor), as today working whit Version 8.3.
 
@@ -71,7 +71,7 @@ If you need help take a look at your favourite tech guy there are plenty Videos 
 
 Installing the vGpu Unlock v3 script from wvthoog. Best tutorial is in the <https://wvthoog.nl/proxmox-vgpu-v3/> makers its own homepage.
 
-Optional: Based on your needs i prefer making Whiteboards for managing what i need for virtual machines and containers (lxc's) and how i need it something like this. If you need a drawing tool <https://excalidraw.com/> is a good one.
+Optional: Based on your needs i prefer making Whiteboards for managing what i need for virtual machines and containers (lxc's). If you need a drawing tool <https://excalidraw.com/> is a good one.
 
 After setting all your Vm's and containers up i woud recommend test <https://wvthoog.nl/proxmox-vgpu-v3/> vGPU unlock script out whit setting a basic vRAM for eatch VirtualMachine/Container. I Have 3 Profiles and one more fore AI testing that shoud use all VRAM thats left over when one of the other profiles not running. So i go whit 3 for testing. thats your GPU vRam / Profiles = Vram.
 
@@ -98,12 +98,15 @@ Guide on how to setup looking glass on proxmox
 
 This guide assumes you have a working VFIO setup for both win10 and your linux guest.   
 
-On the Proxmox Host, Passing the following shared blurb to both the Linux and Windows guests   
+On the Proxmox Host, In the CMD pass to both the Linux and Windows guests   
 
+
+ON LINUXVM
 ```
 qm set <LINUXVM-ID> --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M'
 ```
 
+ON WINDOWSVM
 ```
 qm set  <WINDWOS-VMID> --args '-device ivshmem-plain,memdev=ivshmem,bus=pcie.0 -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M -device virtio-mouse-pci -device virtio-keyboard-pci -spice 'addr=0.0.0.0,port=<YOURSPICEPORT>,disable-ticketing=on''
 ```
