@@ -1,47 +1,28 @@
-# One Personal Computer to Rull Em all
+# Personal Center
 
-Goal: Versatile platforms on one machine that is interchangeable, efficient and energy-saving.
+Goal of this Tutorial
+A Personal Computer that is truly Personal that means
+it's
+- Running Server software thats can run Virtual Machines to parallel Office/Game, Docker and so mutch more. 
+- High Configurational
+- Interchangebal and efficient as it needs to be and as you want it to be (time).
+- Energy saving (working on especially for GPU allocation and sleep times.)
 
-::: warn
-This project is under heavy development changes and bugs are part of it
+::: warning!
+This Project is under heavy development changes and bugs areprettyfie part of it
 
-:::
+## What is it about?
+---
+With this approach, you can flexibly manage your resources including GPU to run different workloads efficiently on a single Proxmox host.
 
-# What is it about?
+## What are we gonna do?
+---
+This project involves setting up a Proxmox hypervisor to enable GPU resource sharing across multiple virtual machines (VMs) and containers using an NVIDIA RTX 2080 Ti. By implementing the vGPU Unlock v3 script, the GPU’s VRAM is dynamically allocated to different profiles in Vm/s ,conatiners defined by you..
 
-With this approach, you can flexibly manage your resources to run different workloads efficiently on a single Proxmox host.
-
-# What are we gonna do?
-
-This project involves setting up a Proxmox hypervisor to enable GPU resource sharing across multiple virtual machines (VMs) and containers using an NVIDIA RTX 2080 Ti. By implementing the vGPU Unlock v3 script, the GPU’s VRAM is dynamically allocated to different profiles for gaming, office work, and AI workloads.
-
-The setup includes custom scripts for switching between profiles and ensures optimal GPU usage based on active tasks. Each VM is tailored with specific GPU profiles to balance performance and compatibility.
+The setup includes a custom script for switching between profiles and ensures optimal GPU usage based on active tasks (manually). Each VM is tailored with specific GPU profiles to balance performance and compatibility.
 
 Optional integrations like Looking Glass enhance usability by providing seamless I/O between guest (mainVM) and guest systems.
 
-::: info
-**Currently not in this Doc (Comming soon).**
-
-Looking Glass setup and guest to guest functionality.
-
-:::
-
-# Wanna do's
-
-| c                                                                                                                         |    |
-|---------------------------------------------------------------------------------------------------------------------------|----|
-| A Script for better VRam Calculation and entry based on your needs.                                                       | ✔️ |
-| Optional integrations like Looking Glass enhance usability by providing seamless I/O between Main guest and guest system. | ✔️  |
-| Not only change GPU VRam based on that script.                                                                            |    |
-
-Thinking about where this project coud go the Feature Rabbit Hole:
-
-- Add a better interface to it than cmd.
-- Add Add Wake-on-lan
-- Add more Energy efficient protocols: like 
-  - GPU status to idle or unbind not consuming 40W
-  - mini redundant Backup Server 
-    - Maybee whit a optional Feature of providing a vm live migrations.
 
 # Setup
 
@@ -239,7 +220,7 @@ Calculates based on ***proxmox_ids.txt*** and ***running vm's***
 VMID, TYPE, Priority0-4, vRAM(GB)
 
 ::: info
-You coud add Profiles based on your needs whit more *TYPE*s but thats in development.
+You coud add Profiles based on your needs whit more *TYPE*s but thats in not supportet right now.
 
 If you wanna have a VM reservate VRAM use *TYPE* 2 and edit in the  ***proxmox_ids.txt*** directly for now.
 
@@ -279,3 +260,10 @@ Big thanks to everyone involved in developing and maintaining this neat piece of
 - [mbilker](https://github.com/mbilker) for the fast Rust version of [vgpu_unlock](https://github.com/mbilker/vgpu_unlock-rs)
 - [PolloLoco](https://gitlab.com/polloloco) for hosting all the patches and his [excellent guide](https://gitlab.com/polloloco/vgpu-proxmox)
 - [Oscar Krause](https://git.collinwebdesigns.de/oscar.krause) for setting up [licensing](https://git.collinwebdesigns.de/oscar.krause/fastapi-dls)
+
+
+# Sometime somewhere in future times.
+
+- Searching a way of making GPU/s consume less power on not bound and idle.
+- Making GPU framebuffer remote no VGA?
+- Make it more accessable.
